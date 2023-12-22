@@ -6,7 +6,7 @@ public class test {
     }
 
 //    public static void bucketSort(double[] A) {
-//        //bucket sort musi mieć liczby w zakresie [0;1)
+//        //bucket sort must have numbers in range [0;1)
 //        int n = A.length;
 //
 //        // Create empty buckets
