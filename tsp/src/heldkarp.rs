@@ -1,17 +1,17 @@
-//*************wersja iteracyjna*************
+//*************iterative version*************
 pub fn tsp_held_karp(distance: &[Vec<i32>], optimal_route: &mut Vec<usize>) -> i32 {
     let n = distance.len();
     //let mut optimal_distance = i32::MAX;
 
-    // Zainicjuj tabelę zapamiętywania
+    // Initialize the storage table
     let mut memo: Vec<Vec<i32>> = vec![vec![i32::MAX; n]; 1 << n];
 
-    // Przypadek podstawowy
+    // Base case
     for i in 1..n {
         memo[1 << i][i] = distance[0][i];
     }
 
-    // Iteruj po wszystkich podzbiorach miast
+    // Iterate over all city subsets
     for subset_size in 2..=n {
         for subset in combinations(n, subset_size) {
             for k in 0..n {
@@ -37,7 +37,7 @@ pub fn tsp_held_karp(distance: &[Vec<i32>], optimal_route: &mut Vec<usize>) -> i
         }
     }
 
-    // Odtwórz optymalną trasę
+    // Recreate the optimal route
     let mut subset = (1 << n) - 1;
     let mut last_city = 0;
 
@@ -60,15 +60,15 @@ pub fn tsp_held_karp(distance: &[Vec<i32>], optimal_route: &mut Vec<usize>) -> i
         last_city = next_city;
     }
 
-    // Dodaj miasto początkowe, aby skompletować trasę
+    // Add a starting city to complete your route
     optimal_route.push(0);
     optimal_route.reverse();
 
-    // Zwróć optymalną drogę
+    // Return optimal route
     memo[(1 << n) - 1][0]
 }
 
-// Funkcja pomocnicza do generowania wszystkich podzbiorów o zadanym rozmiarze
+// Helper function to generate all subsets of a given size
 fn combinations(n: usize, k: usize) -> Vec<usize> {
     let mut result = Vec::new();
     let mut current: i32 = (1 << k) - 1;
@@ -95,7 +95,7 @@ fn combinations(n: usize, k: usize) -> Vec<usize> {
 
 
 
-//*************wersja rekurencyjna*************
+//*************recursive version*************
 // fn permutationsR(
 //     cities: &Vec<Vec<i32>>,
 //     start_vertex: usize,
@@ -105,10 +105,10 @@ fn combinations(n: usize, k: usize) -> Vec<usize> {
 //     optimal_distance: &mut i32,
 // ) {
 //     if current_path.len() == cities.len() {
-//         // Oblicz odległość bieżącej permutacji
+//         // Calculate the distance of the current permutation
 //         let distance = calculate_distanceR(&current_path, &cities);
 //
-//         // Zaktualizuj optymalną trasę i dystans, jeśli bieżąca permutacja jest lepsza
+//         // Update the optimal route and distance if the current permutation is better
 //         if distance < *optimal_distance {
 //             *optimal_distance = distance;
 //             optimal_route.clone_from(current_path);
@@ -142,7 +142,7 @@ fn combinations(n: usize, k: usize) -> Vec<usize> {
 //         distance += distances[path[i]][path[i + 1]];
 //     }
 //
-//     // Dodaj odległość powrotną do miasta początkowego
+//     // Add the return distance to your starting city
 //     distance += distances[path[path.len() - 1]][path[0]];
 //
 //     distance
@@ -157,7 +157,7 @@ fn combinations(n: usize, k: usize) -> Vec<usize> {
 //         let mut current_path = Vec::new();
 //         let mut visited = vec![false; n];
 //
-//         // Dodaj początkowy wierzchołek i oznacz go jako odwiedzony
+//         // Add a starting vertex and mark it as visited
 //         current_path.push(0);
 //         visited[0] = true;
 //
