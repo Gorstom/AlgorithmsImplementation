@@ -1,9 +1,7 @@
 #include <iostream>
 #include "BinaryTree.cpp"
 
-//
-// Created by Tomasz on 28.05.2023.
-//
+
 int main(){
     BinaryTree bt;
 
@@ -30,13 +28,13 @@ int main(){
     }
 
     for(long int i=0; i<4000; i++){
-        std::cout<<"succesor elementu "<<i<<":             "<<bt.treeSuccessor(elements[i])->value;
+        std::cout<<"succesor element "<<i<<":             "<<bt.treeSuccessor(elements[i])->value;
         std::cout<<std::endl;
     }
 
 
     for(long int i=0; i<size; i++){
-        std::cout<<"znaleziony klucz: "<<i<<": "<< (bt.iterativeTreeSearch(elements[0], elements[i]->value)->value);
+        std::cout<<"key found: "<<i<<": "<< (bt.iterativeTreeSearch(elements[0], elements[i]->value)->value);
         std::cout<<std::endl;
 
     }
