@@ -10,10 +10,10 @@ fn generate_and_write_random_distances(num_cities: usize, max_distance: i32, fil
     let mut rng = rand::thread_rng();
     let mut file: File = File::create(filename)?;
 
-    // Zapisz liczbę miast w pierwszej linijce
+    // Write the number of cities in the first line
     writeln!(file, "{}", num_cities)?;
 
-    // Zapisz macierz odległości
+    // Create the distance matrix
     for i in 0..num_cities {
         for j in 0..num_cities {
             let distance:i32 = if i == j {
